@@ -1,0 +1,24 @@
+{
+  "name": "frontend-exercise-app-translation",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "i18next": "23.12.2",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-scripts": "5.0.1",
+    "styled-components": "6.1.12"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
