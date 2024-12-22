@@ -22,11 +22,7 @@ function App() {
 
     useEffect(() => {
         const init = async () => {
-            await initTranslation({
-                supportedLanguages: ['en-US'],
-                defaultLanguage: 'en-US',
-                currentLanguage: 'en-US'
-            });
+            await initTranslation({ defaultLanguage: 'en-US' });
             setInitCompleted(true);
         };
         init();
