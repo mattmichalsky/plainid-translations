@@ -22,8 +22,8 @@ The current solution is not scalable and doesn’t allow us to completely separa
 
 # Your Exercise
 
-1. Provide a solution to our problem by allowing each component to define its own strings and lazy load them only when first rendered.
-2. Add a language switch button to the top header and add support to the Spanish langauage.
+1. Provide a solution to our problem by allowing each component to define its own strings and lazy load them only when first rendered. ✅
+2. Add a language switch button to the top header and add support to the Spanish language.
 
 
 Make sure that your solution is **scalable & reusable**.

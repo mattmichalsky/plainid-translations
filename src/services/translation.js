@@ -1,20 +1,16 @@
 import i18n from 'i18next';
+import i18NextHttpBackend from 'i18next-http-backend';
+import {initReactI18next} from 'react-i18next';
 
-export const init = ({lang}) => {
-    return new Promise(async (resolve, reject) => {
-        const response = await fetch(`/locales/${lang}/strings.json`);
-        const translation = await response.json();
-
-        i18n.init({
-            lng: lang,
-            resources: {
-                [lang]: {translation}
-            }
-        }, (err, t) => {
-            if (err) return reject(err);
-
-            global.t = t;
-            resolve();
-        });
+export const init = ({ supportedLanguages, defaultLanguage, currentLanguage }) =>
+  i18n
+    .use(i18NextHttpBackend)
+    .use(initReactI18next)
+    .init({
+      lng: currentLanguage,
+      fallbackLng: defaultLanguage,
+      supportedLngs: supportedLanguages,
+      backend: {
+        loadPath: '/component-locales/{{ns}}/{{lng}}/strings.json',
+      }
     });
-};

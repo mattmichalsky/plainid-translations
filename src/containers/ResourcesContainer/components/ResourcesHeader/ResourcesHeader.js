@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {HeaderText, SubHeaderText} from '../../../../styles/commonStyles';
+import {useTranslation} from 'react-i18next';
 
 const ResourceHeaderText = styled(HeaderText)`
     color: #686868;
@@ -8,11 +9,11 @@ const ResourceHeaderText = styled(HeaderText)`
 `;
 
 export default function ResourcesHeader() {
-    const {t} = global;
+    const {t} = useTranslation(ResourcesHeader.name);
     return (
         <>
-            <ResourceHeaderText>{t('RESOURCES_HEADER_TITLE')}</ResourceHeaderText>
-            <SubHeaderText>{t('RESOURCES_HEADER_SUBTITLE')}</SubHeaderText>
+            <ResourceHeaderText>{t('TITLE')}</ResourceHeaderText>
+            <SubHeaderText>{t('SUBTITLE')}</SubHeaderText>
         </>
     );
 }

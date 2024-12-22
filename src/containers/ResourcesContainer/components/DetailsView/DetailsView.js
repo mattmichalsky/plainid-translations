@@ -5,6 +5,7 @@ import SectionHeader from './components/SectionHeader/SectionHeader';
 import {TextField} from '../../../../components/TextField/TextField';
 import {VerticalContainer} from '../../../../styles/commonStyles';
 import styled from 'styled-components';
+import {useTranslation} from 'react-i18next';
 
 const WidgetContainer = styled(VerticalContainer)`
   min-height: 100%;
@@ -29,25 +30,25 @@ const FieldsContainer = styled.div`
 `;
 
 export default function DetailsView({resource}) {
-    const {t} = global;
+    const {t} = useTranslation(DetailsView.name);
     const {name, description, resourceType, path} = resource;
 
     const fields = [
         {
             value: name,
-            label: t('DETAILS_VIEW_FIELD_TITLE_NAME')
+            label: t('FIELD_TITLE_NAME')
         },
         {
             value: description,
-            label: t('DETAILS_VIEW_FIELD_TITLE_DESCRIPTION')
+            label: t('FIELD_TITLE_DESCRIPTION')
         },
         {
             value: resourceType,
-            label: t('DETAILS_VIEW_FIELD_TITLE_RESOURCE_TYPE')
+            label: t('FIELD_TITLE_RESOURCE_TYPE')
         },
         {
             value: path,
-            label: t('DETAILS_VIEW_FIELD_TITLE_RESOURCE_PATH')
+            label: t('FIELD_TITLE_RESOURCE_PATH')
         }
     ];
 
@@ -57,7 +58,7 @@ export default function DetailsView({resource}) {
             <ContentContainer>
                 <SectionContainer>
                     <SectionHeader {...{
-                        headerText: t('DETAILS_VIEW_TITLE')
+                        headerText: t('TITLE')
                     }} />
                     <FieldsContainer>
                         {fields.map((props) => <TextField key={props.value} {...props}/>)}
