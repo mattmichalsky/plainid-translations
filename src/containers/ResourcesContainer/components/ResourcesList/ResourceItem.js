@@ -2,7 +2,9 @@ import styled from 'styled-components';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const StyledListItem = styled.li`
+const StyledListItem = styled.li.withConfig({ // Warning fix ^.^", Unrelated to the exercise
+    shouldForwardProp: (prop) => prop !== 'isSelected'
+})`
   display: flex;
   cursor: pointer;
   padding: 6px 5px;
