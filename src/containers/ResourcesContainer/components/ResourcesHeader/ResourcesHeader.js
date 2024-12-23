@@ -9,7 +9,7 @@ const ResourceHeaderText = styled(HeaderText)`
 `;
 
 export default function ResourcesHeader() {
-    const {t} = useTranslation(ResourcesHeader.name);
+    const {t} = useTranslation(import.meta.url);
     return (
         <>
             <ResourceHeaderText>{t('TITLE')}</ResourceHeaderText>

@@ -18,9 +18,9 @@ export default function LanguageSelector() {
 
   useEffect(() => {
     const init = async () => {
-      await i18n.reloadResources(SUPPORTED_LANGUAGES, LanguageSelector.name);
+      await i18n.reloadResources(SUPPORTED_LANGUAGES, import.meta.url);
       const labels = SUPPORTED_LANGUAGES.reduce((acc, lang) => {
-        const resources = i18n.getResourceBundle(lang, LanguageSelector.name);
+        const resources = i18n.getResourceBundle(lang, import.meta.url);
         if (resources?.['LANGUAGE_PRETTY']) {
           acc[lang] = resources['LANGUAGE_PRETTY'];
         }
