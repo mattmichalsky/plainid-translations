@@ -37,7 +37,7 @@ const StyledSearchIcon = styled(SearchIcon)`
 `;
 
 export default function ResourcesFilter({onChange, value}) {
-  const {t} = useTranslation(ResourcesFilter.name);
+  const {t} = useTranslation(import.meta.url);
     return (
         <FilterFieldContainer>
             <StyledTextField {...{

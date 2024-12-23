@@ -1,5 +1,4 @@
 import i18n from 'i18next';
-import i18NextHttpBackend from 'i18next-http-backend';
 import {initReactI18next} from 'react-i18next';
 
 export const SUPPORTED_LANGUAGES = [
@@ -8,7 +7,7 @@ export const SUPPORTED_LANGUAGES = [
 ];
 
 const LANGUAGE_LOCAL_STORAGE_KEY = 'selected-language';
-const defaultNamespace = 'LanguageSelector';
+const defaultNamespace = 'components_HeaderPanel_LanguageSelector';
 
 const getStoredLanguage = () => {
   const storedLanguage = localStorage.getItem(LANGUAGE_LOCAL_STORAGE_KEY);
@@ -25,9 +24,32 @@ const getStoredLanguage = () => {
    ? localStorage.setItem(LANGUAGE_LOCAL_STORAGE_KEY, lang)
    : localStorage.removeItem(LANGUAGE_LOCAL_STORAGE_KEY);
 
+const customBackend = {
+  type: 'backend',
+  init(services, options = {}) {
+    this.services = services;
+    this.options = options;
+  },
+  async read(language, namespace, callback) {
+    const modifiedNamespace = this.normalizeNamespaceOrUrl(namespace);
+    const url = `/locales/${modifiedNamespace}/${language}/strings.json`;
+
+    try {
+      const response = await fetch(url).then(response => response.json());
+      callback(null, response);
+    } catch (e) {
+      callback(e, null);
+    }
+  },
+  normalizeNamespaceOrUrl(namespaceOrUrl) {
+    const match = namespaceOrUrl.match(/\/src\/(.+?)\/[^/]+\.js$/);
+    return !match ? namespaceOrUrl : match[1].replace(/\//g, '_');
+  },
+};
+
 export const init = ({ defaultLanguage }) =>
   i18n
-    .use(i18NextHttpBackend)
+    .use(customBackend)
     .use(initReactI18next)
     .init({
       lng: getStoredLanguage() ?? defaultLanguage,
@@ -36,11 +58,7 @@ export const init = ({ defaultLanguage }) =>
 
       // Define a "default" namespace to avoid attempting to fetch a non-existent 'translation' namespace. This overrides the default behavior of i18next
       ns: [defaultNamespace],
-      defaultNS: defaultNamespace,
-
-      backend: {
-        loadPath: '/component-locales/{{ns}}/{{lng}}/strings.json',
-      }
+      defaultNS: defaultNamespace
     });
 
 export const changeLanguage = async (language) => {

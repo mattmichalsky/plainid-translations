@@ -30,7 +30,7 @@ const FieldsContainer = styled.div`
 `;
 
 export default function DetailsView({resource}) {
-    const {t} = useTranslation(DetailsView.name);
+    const {t} = useTranslation(import.meta.url);
     const {name, description, resourceType, path} = resource;
 
     const fields = [
